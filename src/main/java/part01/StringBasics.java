@@ -1,3 +1,4 @@
+
 package part01;
 
 /**
@@ -26,7 +27,7 @@ public class StringBasics {
         // TODO: Fix this method
 
         if (text.length() > maxLength) {
-            text.substring(0, maxLength);
+            return text.substring(0, maxLength);
         }
         return text;
     }
@@ -41,7 +42,7 @@ public class StringBasics {
     public boolean parseYesOrNo(String text) {
         // FIXME: this seems to always return false, even when the `text` is "yes"
 
-        if (text.toLowerCase() == "yes") {
+        if (text.equalsIgnoreCase("yes")) {
             return true;
         }
         return false;
@@ -61,7 +62,15 @@ public class StringBasics {
      * @return "fizz", "buzz", "fizzbuzz" or the given number as a string.
      */
     public String getFizzBuzz(int number) {
-        return "fizzbuzz"; // TODO: implement this method
+        if (number % 3 == 0 && number % 5 == 0) {
+            return "fizzbuzz";
+        } else if (number % 3 == 0) {
+            return "fizz";
+        } else if (number % 5 == 0) {
+            return "buzz";
+        } else {
+            return String.valueOf(number);
+        }
     }
 
     /**
@@ -80,7 +89,15 @@ public class StringBasics {
      * @return The text centered in a string of the given width: " Java ".
      */
     public String center(String text, int width) {
-        return null; // TODO: implement this method
+        if (text.length() >= width) {
+            return text;
+        }
+
+        int spaces = width - text.length();
+        int left = spaces / 2;
+        int right = spaces - left;
+
+        return " ".repeat(left) + text + " ".repeat(right);
     }
 
     /**
@@ -108,6 +125,17 @@ public class StringBasics {
         // hint: you can split the text by newlines and use your `center` method to
         // center each line separately
 
-        return null; // Implement this extra method if you want. It's not required.
+        String[] lines = text.split("\n", -1);
+        String result = "";
+
+        for (int i = 0; i < lines.length; i++) {
+            result += center(lines[i], lineWidth);
+
+            if (i < lines.length - 1) {
+                result += "\n";
+            }
+        }
+
+        return result;
     }
 }
